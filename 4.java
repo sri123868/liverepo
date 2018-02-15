@@ -1,0 +1,4 @@
+
+master newline
+newrelease changes
+
