@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<wsdl:definitions name="HelloWorld"
+	targetNamespace="http://codenotfound.com/services/helloworld"
+	xmlns:tns="http://codenotfound.com/services/helloworld" xmlns:types="http://codenotfound.com/types/helloworld"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://codenotfound.com/types/helloworld"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+			attributeFormDefault="unqualified" version="1.0">
+
+			<xsd:element name="person">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="firstName" type="xsd:string" />
+						<xsd:element name="lastName" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="greeting">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="greeting" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="CGCGiftCardBalanceRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="businessDate" type="xsd:date" />
+						<xsd:element name="cardNumber" type="xsd:string" />
+						<xsd:element name="currencyId" type="xsd:string" />
+						<xsd:element name="deviceId" type="xsd:string" />
+						<xsd:element name="securityUserId" type="xsd:string" />
+						<xsd:element name="transactionAmount" type="xsd:decimal" />
+						<xsd:element name="isReversible" type="xsd:boolean" />
+						<xsd:element name="isSwiped" type="xsd:boolean" />
+						<xsd:element name="pin" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="CGCGiftCardBalanceResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="authorizationNumber" type="xsd:string" />
+						<xsd:element name="bankReferenceNumber" type="xsd:string" />
+						<xsd:element name="errorCode" type="xsd:string" />
+						<xsd:element name="approved" type="xsd:boolean" />
+						<xsd:element name="balanceAmount" type="xsd:decimal" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="SayHelloInput">
+		<wsdl:part name="person" element="types:person" />
+	</wsdl:message>
+
+	<wsdl:message name="SayHelloOutput">
+		<wsdl:part name="greeting" element="types:greeting" />
+	</wsdl:message>
+
+	<wsdl:message name="GiftCardRequestor">
+		<wsdl:part name="CGCGiftCardRequest" element="types:CGCGiftCardBalanceRequest" />
+	</wsdl:message>
+
+	<wsdl:message name="GiftCardResponsor">
+		<wsdl:part name="CGCGiftCardResponse" element="types:CGCGiftCardBalanceResponse" />
+	</wsdl:message>
+
+
+	<wsdl:portType name="HelloWorld_PortType">
+		<wsdl:operation name="sayHello">
+			<wsdl:input message="tns:SayHelloInput" />
+			<wsdl:output message="tns:SayHelloOutput" />
+		</wsdl:operation>
+
+		<wsdl:operation name="giftCardBalanceInquiry">
+			<wsdl:input message="tns:GiftCardRequestor" />
+			<wsdl:output message="tns:GiftCardResponsor" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="HelloWorld_SoapBinding" type="tns:HelloWorld_PortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="sayHello">
+			<soap:operation
+				soapAction="http://codenotfound.com/services/helloworld/sayHello" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="balanceInquiry">
+			<soap:operation
+				soapAction="http://codenotfound.com/services/helloworld/balanceInquiry" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="HelloWorld_Service">
+		<wsdl:documentation>Hello World service</wsdl:documentation>
+		<wsdl:port name="HelloWorld_Port" binding="tns:HelloWorld_SoapBinding">
+			<soap:address location="http://localhost:9090/codenotfound/ws/helloworld" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>
