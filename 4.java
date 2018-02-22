@@ -1,4 +1,0 @@
-
-master newline
-newrelease changes
-

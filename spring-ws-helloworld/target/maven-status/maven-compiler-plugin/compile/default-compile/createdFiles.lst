@@ -1,0 +1,11 @@
+com\codenotfound\types\helloworld\CGCGiftCardBalanceResponse.class
+com\codenotfound\types\helloworld\ObjectFactory.class
+com\codenotfound\ws\endpoint\WebServiceConfig.class
+com\codenotfound\ws\client\HelloWorldClient.class
+com\codenotfound\ws\client\ClientConfig.class
+com\codenotfound\ws\SpringWsApplication.class
+com\codenotfound\types\helloworld\Greeting.class
+com\codenotfound\types\helloworld\package-info.class
+com\codenotfound\ws\endpoint\HelloWorldEndpoint.class
+com\codenotfound\types\helloworld\CGCGiftCardBalanceRequest.class
+com\codenotfound\types\helloworld\Person.class
